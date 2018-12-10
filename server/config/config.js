@@ -18,14 +18,14 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 //=============================================================================
 let urlDB;
 urlDB = 'mongodb://localhost:27017/cafe';
-// if (process.env.NODE_ENV === 'dev') {
-//   //Local
-//   urlDB = 'mongodb://localhost:27017/cafe';
-// } else {
-//   //Remote
-//   urlDB =  process.env.MONGO_URL;
-//
-// }
+if (process.env.NODE_ENV === 'dev') {
+  //Local
+  urlDB = 'mongodb://localhost:27017/cafe';
+} else {
+  //Remote
+  urlDB =  process.env.MONGO_URL;
+
+}
 
 process.env.URL_DB = urlDB;
 
