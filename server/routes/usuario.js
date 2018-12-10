@@ -13,10 +13,12 @@
 	const Usuario = require('../models/usuario');
 //
 
-
+//Midelware
+	const { verificacionToken, verificaAdminRole } = require('../midellware/autenticacion');
+//
 
 //PETICIONES
-	router.get('/usuarios', (req, res) => {
+	router.get('/usuarios', verificacionToken, (req, res) => {
 
 		let desde = req.query.desde || 0 ;
 		desde = Number(desde);
@@ -51,7 +53,7 @@
 
 		}
 
-	
+
 
 		Usuario.find(busqueda(nombre, email, estado), 'nombre email role')
 			.skip(desde)
@@ -81,7 +83,7 @@
 	})
 
 
-	router.post('/usuarios', (req, res) => {
+	router.post('/usuarios', [verificacionToken, verificaAdminRole], (req, res) => {
 
 		let body = req.body;
 
@@ -111,7 +113,7 @@
 	})
 
 
-	router.put('/usuarios/:id', (req, res) => {
+	router.put('/usuarios/:id', [verificacionToken, verificaAdminRole], (req, res) => {
 
 		let id = req.params.id;
 		let body = _.pick( req.body,['nombre', 'email', 'role', 'estado'])   ;
@@ -119,7 +121,7 @@
 
 		Usuario.findByIdAndUpdate(id, body , {new: true, runValidators: true}, (err, usuario) => {
 
-			if (err) {
+			if (err || usuario === null) {
 				return res.status(400).json({
 					ok: false,
 					err
@@ -136,9 +138,9 @@
 	})
 
 
-	router.delete('/usuarios/:id', (req, res) => {
+	router.delete('/usuarios/:id', [verificacionToken, verificaAdminRole], (req, res) => {
 
-		console.log(req);
+
 
 		let id = req.params.id;
 

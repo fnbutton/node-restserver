@@ -13,35 +13,40 @@ require('./config/config');
 	const bodyParser = require('body-parser');
 
 	//Modulos Locales
-	const routes = require('./routes/usuario');
+
+
 //
 
 //PORT
-const port = process.env.PORT;
+	const port = process.env.PORT;
+//
 
 
 
-mongoose.connect(process.env.URL_DB, { useNewUrlParser: true }, (err, res) => {
 
-	if (err) throw err;
+//Midelware
+	// parse application/x-www-form-urlencoded
+	app.use(bodyParser.urlencoded({ extended: false }))
 
-	console.log('base de datos is connected');
-
-});
-
-
-
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
-
-// parse application/json
-app.use(bodyParser.json())
-
+	// parse application/json
+	app.use(bodyParser.json())
+//
 
 
 //RUTAS
-app.use('/', routes);
+	app.use('/', require('./routes/index') )
+//
 
+
+//Conexion a la DB
+	mongoose.connect(process.env.URL_DB, { useNewUrlParser: true }, (err, res) => {
+
+		if (err) throw err;
+
+		console.log('base de datos is connected');
+
+	});
+//
 
 app.listen(port, () => {
 	console.log(`Server on port: ${ port } `);

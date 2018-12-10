@@ -17,14 +17,32 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 // DATABASE
 //=============================================================================
 let urlDB;
-
-if (process.env.NODE_ENV === 'dev') {
-  //Local
-  urlDB = 'mongodb://localhost:27017/cafe'
-} else {
-  //Remote
-  urlDB =  process.env.MONGO_URL;
-
-}
+urlDB = 'mongodb://localhost:27017/cafe';
+// if (process.env.NODE_ENV === 'dev') {
+//   //Local
+//   urlDB = 'mongodb://localhost:27017/cafe';
+// } else {
+//   //Remote
+//   urlDB =  process.env.MONGO_URL;
+//
+// }
 
 process.env.URL_DB = urlDB;
+
+
+
+//=============================================================================
+// Vencimiento del token
+//=============================================================================
+//60 segundos
+//60 minutos
+//24 horas
+//30 Dias
+
+process.env.CADOCIDAD_TOKEN = 60 * 60 * 24 * 30 ;
+
+//=============================================================================
+// Seed de autenticacion
+//=============================================================================
+
+process.env.SEED = process.env.SEED || 'este-es-el-seed-de-desarrollo';
