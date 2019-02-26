@@ -2,6 +2,8 @@
 require('./config/config');
 
 //Dependencias
+	const { resolve } = require('path');
+
 	//Express
 	const express = require('express');
 	const app = express();
@@ -32,6 +34,9 @@ require('./config/config');
 	app.use(bodyParser.json())
 //
 
+//Public Files
+app.use(express.static(resolve(__dirname, '../public')))
+//
 
 //RUTAS
 	app.use('/', require('./routes/index') )

@@ -46,3 +46,9 @@ process.env.CADOCIDAD_TOKEN = 60 * 60 * 24 * 30 ;
 //=============================================================================
 
 process.env.SEED = process.env.SEED || 'este-es-el-seed-de-desarrollo';
+
+//=============================================================================
+// Seed de autenticacion
+//=============================================================================
+
+process.env.CLIENT_ID = process.env.CLIENT_ID ||`499683980252-oiqu5enkjukh8b6bijem75b5m38bkec1.apps.googleusercontent.com`;
