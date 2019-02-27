@@ -83,7 +83,7 @@
 	})
 
 
-	router.post('/usuarios', [verificacionToken, verificaAdminRole], (req, res) => {
+	router.post('/usuarios', [verificacionToken/*, verificaAdminRole*/], (req, res) => {
 
 		let body = req.body;
 
